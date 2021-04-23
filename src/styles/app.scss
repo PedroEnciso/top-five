@@ -1,0 +1,60 @@
+@import "./colors";
+@import "./side-bar";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+}
+
+.header {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  img {
+    height: 3.125rem;
+    margin-left: 4.5rem;
+    margin-right: 4.5rem;
+  }
+  .search-bar {
+    position: relative;
+    .search-icon {
+      color: $light-gray-text;
+      font-size: 1.125rem;
+      position: absolute;
+      top: 50%;
+      left: 2rem;
+      transform: translate(-50%, -50%);
+    }
+    input {
+      height: 2.5rem;
+      width: 20rem;
+      border: none;
+      background: $light-gray;
+      border-radius: 20px;
+      padding-left: 4rem;
+      &::placeholder {
+        color: $light-gray-text;
+      }
+    }
+  }
+}
+
+h1 {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 4rem;
+  color: $dark-accent;
+  margin-left: 2.5rem;
+}
