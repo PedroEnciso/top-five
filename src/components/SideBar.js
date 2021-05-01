@@ -1,6 +1,6 @@
 import React from "react";
 
-const SideBar = () => {
+const SideBar = ({ league }) => {
   return (
     <div className="side-bar">
       <ul>
