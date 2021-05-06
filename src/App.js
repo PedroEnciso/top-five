@@ -5,49 +5,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 // components
 import SideBar from "./components/SideBar";
+import axios from "axios";
 // styles
 import "./styles/app.scss";
 
 function App() {
   // variables
-  let allLeaguesList = [];
   let randomNumber;
+  const url = "https://www.thesportsdb.com/api/v1/json/1/all_leagues.php";
 
   //useState
-  const [league, setLeague] = useState([]);
-
-  // useEffect
-  /*
-  useEffect(() => {
-    fetch("https://www.thesportsdb.com/api/v1/json/1/all_leagues.php")
-      .then((resp) => resp.json())
-      .then((data) => {
-        for (let i = 0; i < data.leagues.length; i++) {
-          if (data.leagues[i].strSport === "Soccer") {
-            allLeaguesList.push(data.leagues[i].strLeague);
-          }
-        }
-        setLeague(allLeaguesList[0]);
-      });
-  }, []);
-    */
+  const [league, setLeague] = useState(null);
+  const [leagueList, setLeagueList] = useState(null);
 
   useEffect(() => {
-    fetch("https://www.thesportsdb.com/api/v1/json/1/all_leagues.php")
-      .then((resp) => resp.json())
-      .then((data) => {
-        for (let i = 0; i < data.leagues.length; i++) {
-          if (data.leagues[i].strSport === "Soccer") {
-            allLeaguesList.push(data.leagues[i].strLeague);
-          }
-        }
-      });
-  }, [league]);
+    axios.get(url).then((response) => {
+      setLeague(response.data.leagues[0].strLeague);
+      setLeagueList(response.data.leagues);
+    });
+  }, [url]);
 
   // functions
   const getRandomLeague = () => {
-    randomNumber = Math.floor(Math.random(allLeaguesList.length) * 100);
-    setLeague(allLeaguesList[randomNumber]);
+    randomNumber = Math.floor(Math.random(leagueList.length) * 100);
+    setLeague(leagueList[randomNumber].strLeague);
   };
 
   return (
