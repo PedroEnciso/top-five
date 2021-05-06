@@ -28,7 +28,13 @@ function App() {
   // functions
   const getRandomLeague = () => {
     randomNumber = Math.floor(Math.random(leagueList.length) * 100);
-    setLeague(leagueList[randomNumber].strLeague);
+    // ensure that the function chooses a soccer league
+    if (leagueList[randomNumber].strSport === "Soccer") {
+      setLeague(leagueList[randomNumber].strLeague);
+      return;
+    } else {
+      getRandomLeague();
+    }
   };
 
   return (
