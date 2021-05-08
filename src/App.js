@@ -17,10 +17,12 @@ function App() {
   //useState
   const [league, setLeague] = useState(null);
   const [leagueList, setLeagueList] = useState(null);
+  const [leagueId, setLeagueId] = useState();
 
   useEffect(() => {
     axios.get(url).then((response) => {
       setLeague(response.data.leagues[0].strLeague);
+      setLeagueId(response.data.leagues[0].idLeague);
       setLeagueList(response.data.leagues);
     });
   }, [url]);
@@ -31,6 +33,7 @@ function App() {
     // ensure that the function chooses a soccer league
     if (leagueList[randomNumber].strSport === "Soccer") {
       setLeague(leagueList[randomNumber].strLeague);
+      setLeagueId(leagueList[randomNumber].idLeague);
       return;
     } else {
       getRandomLeague();
@@ -50,6 +53,7 @@ function App() {
           <button onClick={getRandomLeague}>Random League</button>
         </div>
         <h1>{league}</h1>
+        <p>The League ID is {leagueId}</p>
       </div>
     </div>
   );
