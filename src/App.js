@@ -17,27 +17,36 @@ function App() {
   //useState
   const [league, setLeague] = useState(null);
   const [leagueList, setLeagueList] = useState(null);
-  const [leagueId, setLeagueId] = useState();
+  const [leagueId, setLeagueId] = useState(0);
+  const [leagueIdList, setLeagueIdList] = useState(null);
 
   useEffect(() => {
+    let listOfLeagues = [];
+    let listOfLeagueIds = [];
     axios.get(url).then((response) => {
       setLeague(response.data.leagues[0].strLeague);
       setLeagueId(response.data.leagues[0].idLeague);
-      setLeagueList(response.data.leagues);
+      //setLeagueList(response.data.leagues);
+      for (let i = 0; i < response.data.leagues.length; i++) {
+        if (response.data.leagues[i].strSport === "Soccer") {
+          listOfLeagues.push(response.data.leagues[i].strLeague);
+          listOfLeagueIds.push(response.data.leagues[i].idLeague);
+        }
+      }
+      setLeagueList(listOfLeagues);
+      setLeagueIdList(listOfLeagueIds);
     });
   }, [url]);
 
   // functions
   const getRandomLeague = () => {
     randomNumber = Math.floor(Math.random(leagueList.length) * 100);
-    // ensure that the function chooses a soccer league
-    if (leagueList[randomNumber].strSport === "Soccer") {
-      setLeague(leagueList[randomNumber].strLeague);
-      setLeagueId(leagueList[randomNumber].idLeague);
-      return;
-    } else {
-      getRandomLeague();
-    }
+    setLeague(leagueList[randomNumber]);
+    setLeagueId(leagueIdList[randomNumber]);
+  };
+
+  const keyup = () => {
+    console.log("hello");
   };
 
   return (
@@ -48,7 +57,11 @@ function App() {
           <img src={topFiveLogo} alt="logo" />
           <div className="search-bar">
             <FontAwesomeIcon className="search-icon" icon={faSearch} />
-            <input type="text" placeholder="Search for a league..." />
+            <input
+              onKeyUp={keyup}
+              type="text"
+              placeholder="Search for a league..."
+            />
           </div>
           <button onClick={getRandomLeague}>Random League</button>
         </div>
