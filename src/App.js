@@ -60,6 +60,16 @@ function App() {
     setSuggestedLeagues(suggestions);
   };
 
+  const chooseSuggestion = (event) => {
+    const chosenSuggestion = event.target;
+    setLeague(chosenSuggestion.innerHTML);
+    // clear suggestion box
+    setSuggestedLeagues([]);
+    // update league ID
+    const index = leagueList.indexOf(chosenSuggestion.innerHTML);
+    setLeagueId(leagueIdList[index]);
+  };
+
   const capitalizeInput = (userInput) => {
     if (!userInput) {
       return;
@@ -90,8 +100,8 @@ function App() {
           <button onClick={getRandomLeague}>Random League</button>
           <div className="suggestion-container">
             {suggestedLeagues.map((league) => (
-              <div>
-                <p key={league}>{league}</p>
+              <div key={league} onClick={(event) => chooseSuggestion(event)}>
+                <p>{league}</p>
                 <hr />
               </div>
             ))}
