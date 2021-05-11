@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 // components
 import SideBar from "./components/SideBar";
+import UpcomingMatches from "./components/UpcomingMatches";
 import axios from "axios";
 // styles
 import "./styles/app.scss";
@@ -108,7 +109,7 @@ function App() {
           </div>
         </div>
         <h1>{league}</h1>
-        <p>The League ID is {leagueId}</p>
+        <UpcomingMatches leagueId={leagueId} />
       </div>
     </div>
   );
