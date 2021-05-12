@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-
+import Match from "./Match";
 import axios from "axios";
 
 function UpcomingMatches({ leagueId }) {
@@ -7,26 +7,24 @@ function UpcomingMatches({ leagueId }) {
   const url = `https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id=${leagueId}`;
 
   // useState
-  const [matchDay, setMatchDay] = useState(0);
   const [results, setResults] = useState([]);
 
   useEffect(() => {
     axios.get(url).then((response) => {
       if (response.data.events) {
-        let week = response.data.events[0].intRound;
-        setMatchDay(`Match Day ${week}`);
-        setResults(response.data.events);
-      } else {
-        setMatchDay(`No previous matches`);
+        setResults(response.data.events.slice(0, 10));
       }
     });
   }, [url]);
 
-  console.log(results);
-
   return (
-    <div>
-      <h4>{matchDay}</h4>
+    <div className="upcoming-matches">
+      <h4 className="title">Latest Results</h4>
+      <div className="latest-results">
+        {results.map((result) => (
+          <Match result={result} key={result.idEvent} />
+        ))}
+      </div>
     </div>
   );
 }
