@@ -86,7 +86,7 @@ function App() {
 
   return (
     <div className="layout-grid">
-      <SideBar league={league} />
+      <SideBar leagueId={leagueId} />
       <div className="content">
         <div className="header">
           <img src={topFiveLogo} alt="logo" />

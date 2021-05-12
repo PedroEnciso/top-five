@@ -1,14 +1,27 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
+import axios from "axios";
 
-const SideBar = ({ league }) => {
+const SideBar = ({ leagueId }) => {
+  // variables
+  const url = `https://www.thesportsdb.com/api/v1/json/1/lookupleague.php?id=${leagueId}`;
+
+  // state
+  const [leagueBadge, setLeagueBadge] = useState(null);
+
+  // fetch
+  useEffect(() => {
+    axios.get(url).then((response) => {
+      if (response.data.leagues) {
+        setLeagueBadge(response.data.leagues[0].strBadge);
+      }
+    });
+  }, [url]);
+
   return (
     <div className="side-bar">
-      <ul>
-        <li className="selected">Home</li>
-        <li>Table</li>
-        <li>Matches</li>
-        <li>Stats</li>
-      </ul>
+      <div className="league-badge-container">
+        <img src={leagueBadge} alt="league badge" />
+      </div>
     </div>
   );
 };
