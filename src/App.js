@@ -6,6 +6,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 // components
 import SideBar from "./components/SideBar";
 import UpcomingMatches from "./components/UpcomingMatches";
+import LeagueTable from "./components/LeagueTable";
 import axios from "axios";
 // styles
 import "./styles/app.scss";
