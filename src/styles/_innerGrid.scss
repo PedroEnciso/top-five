@@ -1,0 +1,8 @@
+.inner-grid {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+  display: grid;
+  grid-template-areas:
+    "table section-1"
+    "table section-2";
+}

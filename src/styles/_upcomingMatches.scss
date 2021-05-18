@@ -5,9 +5,11 @@
     font-family: $title-text;
   }
   .latest-results {
+    width: 100%;
     margin-left: 2.5rem;
     margin-right: 2.5rem;
     margin-top: 1rem;
     display: flex;
+    flex-wrap: wrap;
   }
 }

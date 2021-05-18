@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
-import MatchDescription from "./MatchDescription";
+//import MatchDescription from "./MatchDescription";
 
 function Match({ result }) {
   // variables
@@ -10,7 +10,7 @@ function Match({ result }) {
   //state
   const [homeBadge, setHomeBadge] = useState(null);
   const [awayBadge, setAwayBadge] = useState(null);
-  const [showDescription, setShowDescription] = useState(false);
+  //const [showDescription, setShowDescription] = useState(false);
 
   // fetch
   useEffect(() => {
@@ -25,12 +25,30 @@ function Match({ result }) {
     });
   }, [urlAway]);
 
+  /*
   const toggleDescription = () => {
     setShowDescription(!showDescription);
   };
+  */
 
   return (
-    <div className="match-card" onClick={toggleDescription}>
+    <div className="match-card">
+      <div className="match-info">
+        <img src={homeBadge} alt="home team badge" />
+        <h4>
+          {result.intHomeScore} - {result.intAwayScore}
+        </h4>
+        <img src={awayBadge} alt="away team badge" />
+      </div>
+    </div>
+  );
+}
+
+export default Match;
+
+/*
+
+  <div className="match-card" onClick={toggleDescription}>
       <div className="match-info">
         <div className="team">
           <img src={homeBadge} alt="home team badge" />
@@ -53,7 +71,5 @@ function Match({ result }) {
         />
       ) : null}
     </div>
-  );
-}
 
-export default Match;
+*/

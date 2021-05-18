@@ -6,7 +6,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 // components
 import SideBar from "./components/SideBar";
 import UpcomingMatches from "./components/UpcomingMatches";
-import LeagueTable from "./components/LeagueTable";
+import InnerGrid from "./components/InnerGrid";
 import axios from "axios";
 // styles
 import "./styles/app.scss";
@@ -111,6 +111,7 @@ function App() {
         </div>
         <h1>{league}</h1>
         <UpcomingMatches leagueId={leagueId} />
+        <InnerGrid leagueId={leagueId} />
       </div>
     </div>
   );
