@@ -11,13 +11,51 @@ function LeagueTable({ leagueId }) {
   // fetch
   useEffect(() => {
     axios.get(url).then((response) => {
-      console.log(response.data.table);
+      if (response.data.table) {
+        let standingsData = sortLeagueStandings(response.data.table);
+        setStandings(standingsData);
+      }
     });
   }, [url]);
+
+  // functions
+  const sortLeagueStandings = (standingsData) => {
+    let leagueStandings = [];
+    let leaguePosition;
+    for (let j = 0; j < standingsData.length; j++) {
+      for (let i = 0; i < standingsData.length; i++) {
+        leaguePosition = standingsData[i].intRank - 1;
+        if (leaguePosition === j) {
+          leagueStandings.push(standingsData[i]);
+        }
+      }
+    }
+    return leagueStandings;
+  };
+
   return (
     <div>
       <h4>League Table</h4>
-      <div className="league-table"></div>
+      <table className="league-table">
+        <thead>
+          <tr>
+            <td>Team</td>
+            <td>P</td>
+            <td>GD</td>
+            <td>Pts</td>
+          </tr>
+        </thead>
+        <tbody>
+          {standings.map((team) => (
+            <tr key={team.strTeam}>
+              <td>{team.strTeam}</td>
+              <td>{team.intPlayed}</td>
+              <td>{team.intGoalDifference}</td>
+              <td>{team.intPoints}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
